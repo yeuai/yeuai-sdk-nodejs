@@ -1,0 +1,1 @@
+console.log('Hello yeu.ai, a nlp service for vietnamese!')
