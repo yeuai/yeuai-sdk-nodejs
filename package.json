@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/yeuai/yeuai-nodejs-client/issues"
   },
-  "homepage": "https://github.com/yeuai/yeuai-nodejs-client#readme"
+  "homepage": "https://github.com/yeuai/yeuai-nodejs-client#readme",
+  "dependencies": {
+    "debug": "^3.0.1",
+    "superagent": "^3.6.0"
+  },
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0"
+  }
 }

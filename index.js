@@ -1,1 +1,1 @@
-console.log('Hello yeu.ai, a nlp service for vietnamese!')
+module.exports = require('./module/yeuai')
