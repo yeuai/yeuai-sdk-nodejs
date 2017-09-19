@@ -2,6 +2,7 @@
  * Module dependencies
  * @private
  */
+'use strict';
 const request = require('superagent');
 const debug = require('debug')('yeuai:api');
 
