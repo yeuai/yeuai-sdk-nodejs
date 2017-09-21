@@ -1,6 +1,8 @@
 Node.js SDK for Yeu.ai
 ======================
 
+[![npm version](https://img.shields.io/npm/v/yeuai.svg?style=flat)](https://www.npmjs.com/package/yeuai)
+
 Đây là gói thư viện cho phép sử dụng dịch vụ từ [Yeu.ai](https://docs.yeu.ai) cho các tác vụ cơ bản của xử lý ngôn ngữ tự nhiên tiếng Việt. Bạn hoàn toàn có thể tích hợp gói thư viện này vào ứng dụng của bạn và sử dụng nó một cách miễn phí! Chắc chắn là miễn phí :D
 
 * [Installation](#installation)
