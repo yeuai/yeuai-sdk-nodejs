@@ -10,6 +10,7 @@ var dir = '../test/specs/';
   'postagger',
   'chunking',
   'qtypes',
+  'parser',
 ].forEach((script) => {
   require(path.join(dir, script));
 });

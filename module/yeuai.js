@@ -4,6 +4,7 @@
  */
 'use strict';
 const request = require('superagent');
+const parser = require('./parser');
 const debug = require('debug')('yeuai:api');
 
 /**
@@ -144,4 +145,26 @@ class Application {
     }
 
 
+    /**
+     * Phân tích và bóc tách từ loại
+     * Thành: Danh từ, động từ, tính từ, thực thể, tên riêng.
+     * @param {String} text 
+     */
+    parse(text) {
+        return this.pos_tag(text).then((result) => {
+            let tokens = result.response;
+            return {
+                success: true,
+                data: {
+                    nouns: parser.matchNouns(tokens),
+                    pronouns: parser.matchPronouns(tokens),
+                    verbs: parser.matchVerbs(tokens),
+                    adverbs: parser.matchAdverbs(tokens),
+                    adjectives: parser.matchAdjectives(tokens),
+                    entities: parser.matchEntities(tokens),
+                    names: parser.matchNames(tokens)
+                }
+            }
+        })
+    }
 }
