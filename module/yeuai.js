@@ -3,6 +3,7 @@
  * @private
  */
 'use strict';
+const _ = require('lodash');
 const request = require('superagent');
 const parser = require('./parser');
 const debug = require('debug')('yeuai:api');
@@ -121,6 +122,28 @@ class Application {
     }
 
     /**
+     * Named Entity Recoginition
+     * @param {String} text 
+     */
+    ner(text) {
+        return new Promise((resolve, reject) => {
+            let url = `https://${this.options.hostname}/${this.options.endpoint}/ner`;
+            request.post(url)
+                .set(this._headers())
+                .query({
+                    text: text
+                })
+                .end((err, res) => {
+                    if (!err) {
+                        resolve(res.body)
+                    } else {
+                        reject(err)
+                    }
+                })
+        })
+    }
+
+    /**
      * Phân tích câu hỏi tiếng Việt
      * + Phân loại câu hỏi WH
      * + Phân loại chủ đề câu hỏi
@@ -151,18 +174,21 @@ class Application {
      * @param {String} text 
      */
     parse(text) {
-        return this.pos_tag(text).then((result) => {
+        // extract tags
+        return this.ner(text).then((result) => {
             let tokens = result.response;
+            let posTags = _.map(tokens, (tag) => [tag[0], tag[1]])
+            let nerTags = _.map(tokens, (tag) => [tag[0], tag[3]])
+
             return {
                 success: true,
                 data: {
-                    nouns: parser.matchNouns(tokens),
-                    pronouns: parser.matchPronouns(tokens),
-                    verbs: parser.matchVerbs(tokens),
-                    adverbs: parser.matchAdverbs(tokens),
-                    adjectives: parser.matchAdjectives(tokens),
-                    entities: parser.matchEntities(tokens),
-                    names: parser.matchNames(tokens)
+                    nouns: parser.matchNouns(posTags),
+                    pronouns: parser.matchPronouns(posTags),
+                    verbs: parser.matchVerbs(posTags),
+                    adverbs: parser.matchAdverbs(posTags),
+                    adjectives: parser.matchAdjectives(posTags),
+                    entities: parser.matchEntities(nerTags)
                 }
             }
         })

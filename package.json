@@ -25,6 +25,7 @@
   "homepage": "https://github.com/yeuai/yeuai-nodejs-client#readme",
   "dependencies": {
     "debug": "^3.0.1",
+    "lodash": "^4.17.4",
     "superagent": "^3.6.0"
   },
   "devDependencies": {
